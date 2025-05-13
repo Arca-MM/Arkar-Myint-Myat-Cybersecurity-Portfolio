@@ -1,0 +1,18 @@
+> # Cybersecurity Incident Report: Network Traffic Analysis
+
+### Overview
+
+I am a cybersecurity analyst working at a company that specializes in providing IT services for clients. Several customers of clients reported that they were not able to access the client company website www.yummyrecipesforme.com, and saw the error “destination port unreachable” after waiting for the page to load. 
+
+I am tasked with analyzing the situation and determining which network protocol was affected during this incident. To start, I attempt to visit the website and I also receive the error “destination port unreachable.” To troubleshoot the issue, I load my network analyzer tool, tcpdump, and attempt to load the webpage again. To load the webpage, my browser sends a query to a DNS server via the UDP protocol to retrieve the IP address for the website's domain name; this is part of the DNS protocol. My browser then uses this IP address as the destination IP for sending an HTTPS request to the web server to display the webpage  The analyzer shows that when I send UDP packets to the DNS server, you receive ICMP packets containing the error message: “udp port 53 unreachable.” 
+
+*Here is the summary of log*
+![Network Traffic Log!](./assets/network_traffic_log.png)
+
+| Part 1: Providing a summary of the problem found in the DNS and ICMP traffic log. |
+| :----- |
+| The UDP protocol reveals that port 53  is unreachable while trying to access it. This is based on the results of the network analysis, which show that the ICMP echo reply returned the error message “UDP port 53 unreachable”. The port noted in the error message is used for DNS service. This may indicate the issue, which is most likely to be that the DNS server is not responding or the firewall has blocked the UDP 53 port. |
+
+| Part 2: Explain my analysis of the data and providing possible causes of the incident. |
+| ----- |
+| The incident occurred this morning when customers of clients reported that they were not able to access the company website www.yummyrecipesforme.com and found an error that “destination port unreachable” after waiting for a while. In order to troubleshoot the issue, the network security team responded by visiting the website and saw the destination port unreachable, used the network analyzer tool, tcpdump and attempted to load the webpage again. After inspection, the team found out from the log file that DNS server UDP port 53 is not responding the requests from the computer. Further investigation is needed to identify the real cause of this incident. Most probably causes are that DNS server is down or the firewall has blocked this port. There is also a possibility that a DDoS attack has hit the server. This incident is not likely to be the cause of the internet connection. |
