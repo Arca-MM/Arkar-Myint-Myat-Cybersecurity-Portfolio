@@ -12,14 +12,13 @@ I take the server offline temporarily so that the machine can recover and return
 
 **See the "Logs summary" [here](https://docs.google.com/spreadsheets/d/1enpRzrIao3J2Lp2tOI0hmu1Cu7D7CjLGhFAiTiR9J64/edit?gid=218501934#gid=218501934)**.
 
-| Part 1: Identifying the type of attack that may have caused this 
-network interruption |
-| :----- |
-| One potential explanation for the website's connection timeout error message is that the web server is overloaded and has failed to respond due to a SYN flood attack. The logs indicate that IP address of one of the outsiders is sending SYN requests repeatedly and did not complete the handshake. This event could be Denial of Service (DoS, Syn Flood attack). |
+> ### Part 1: Identifying the type of attack that may have caused this network interruption
 
-| Part 2: Explaining how the attack is causing the website to malfunction |
-| ----- |
-| When website visitors try to establish a connection with the web server, a three-way handshake occurs using the TCP protocol. These are the steps that occur:
+One potential explanation for the website's connection timeout error message is that the web server is overloaded and has failed to respond due to a SYN flood attack. The logs indicate that IP address of one of the outsiders is sending SYN requests repeatedly and did not complete the handshake. This event could be Denial of Service (DoS, Syn Flood attack). 
+
+> ### Part 2: Explaining how the attack is causing the website to malfunction
+
+When website visitors try to establish a connection with the web server, a three-way handshake occurs using the TCP protocol. These are the steps that occur:
 
 1. Client machine sends TCP Synchronize(SYN) packet to the server.
 
@@ -27,4 +26,4 @@ network interruption |
 
 3. The client knows the SYN-ACK and sends back an ACK to establish a connection successfully.
 
-When the malicious actor sends a large number of SYN packets to the server all at once, the server reserves port connections for each one of those for a limited amount of time, which also blocks all the valid connection requests. After all the available resources and ports have been opened, the server failed to function properly, which leads to downtime. The time other employees try to use the website, they can’t access the website due to this attack. Examination of the logs generated from the packet sniffer indicates that an outsider IP address is constantly sending SYN requests and the server fails to process new connection requests. Consequently, when an employee accesses this website, he/she gets the timeout error on browser. |
+When the malicious actor sends a large number of SYN packets to the server all at once, the server reserves port connections for each one of those for a limited amount of time, which also blocks all the valid connection requests. After all the available resources and ports have been opened, the server failed to function properly, which leads to downtime. The time other employees try to use the website, they can’t access the website due to this attack. Examination of the logs generated from the packet sniffer indicates that an outsider IP address is constantly sending SYN requests and the server fails to process new connection requests. Consequently, when an employee accesses this website, he/she gets the timeout error on browser. 
